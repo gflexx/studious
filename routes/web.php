@@ -1,13 +1,21 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\UserController;
+use App\Models\Studio;
+use App\Models\Track;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home', []);
+    $studios = Studio::all();
+    $tracks = Track::all();
+    return view('home', [
+        'studios' => $studios,
+        'tracks' => $tracks
+    ]);
 });
 
 // studio
@@ -28,7 +36,7 @@ Route::get('studio/{id}', [StudioController::class, 'showStudio'])->name('show_s
 
 Route::get('tracks/all', [TrackController::class, 'index'])->name('tracks_all');
 
-Route::get('track/{id}', [TrackController::class, 'showTrack'])->name('show_track');
+Route::get('track/show/{id}', [TrackController::class, 'showTrack'])->name('show_track');
 
 Route::get('track/add', [TrackController::class, 'addTrack'])->name('add_track');
 
@@ -38,7 +46,7 @@ Route::post('track/save', [TrackController::class, 'saveTrack'])->name('save_tra
 
 Route::get('users/', [UserController::class, 'profile'])->name('profile');
 
-Route::get('users/edit', [UserController::class, 'editProfile'])->name('edit_profile');
+Route::get('users/edit/{id}', [UserController::class, 'editProfile'])->name('edit_profile');
 
 Route::post('users/save', [UserController::class, 'saveEdit'])->name('save_edit');
 
@@ -50,6 +58,14 @@ Route::post('save/user', [AuthController::class, 'saveUser'])->name('save_user')
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 
-Route::post('login/authenticate', [AuthController::class, 'logiAuth'])->name('login_auth');
+Route::post('login/authenticate', [AuthController::class, 'loginAuth'])->name('login_auth');
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+// cart
+
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+
+Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart_add');
+
+Route::post('cart/remove', [CartController::class, 'removeFromCart'])->name('cart_remove');

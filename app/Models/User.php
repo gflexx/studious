@@ -54,4 +54,12 @@ class User extends Authenticatable
         return $this->hasOne(Signing::class, 'user_id');
     }
 
+    public function carts(){
+        return $this->hasMany(Cart::class, 'owner_id');
+    }
+
+    public function cartItems(){
+        return $this->hasMany(CartItem::class, 'owner_id');
+    }
+
 }
