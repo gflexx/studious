@@ -19,8 +19,21 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 justify-content-center mb-5">
         <h3 class="text-white">Tracks</h3>
+        @forelse ($tracks as $track)
+            <div class="row studio-song">
+                <div class="col-4 col-md-2">
+                    <img src="{{ asset($track->image) }}" alt="" class="studio-tack-img rounded">
+                </div>
+                <div class="col">
+                    <p class="text-white">{{ $track->title }}</p>
+                    <p class="text-info">By: <span class="text-white">{{ $track->owner->username }}</span></p>
+                </div>
+            </div>
+        @empty
+            <p class="text-white">no tracks available yet</p>
+        @endforelse
     </div>
 
 </div>

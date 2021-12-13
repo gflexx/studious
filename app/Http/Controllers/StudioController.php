@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Signing;
 use App\Models\Studio;
+use App\Models\Track;
 use Illuminate\Http\Request;
 
 class StudioController extends Controller
@@ -16,8 +18,24 @@ class StudioController extends Controller
 
     public function showStudio($id){
         $studio = Studio::findOrFail($id);
+        $signings = Signing::where('studio_id', $studio->id)->get();
+
+        // create music array
+        $userArr = [];
+
+        // get user from studio signing
+        foreach($signings as $signing){
+            if(!in_array($signing->user, $userArr)){
+                array_push($userArr, $signing->user->id);
+            }
+        }
+
+        // get tracks with user ids found
+        $tracks = Track::whereIn('owner_id', $userArr)->get();
+
         return view('studio.show', [
             'studio' => $studio,
+            'tracks' => $tracks,
         ]);
     }
 
@@ -37,7 +55,10 @@ class StudioController extends Controller
         $imgPath = $request->file('image')->move('studios', $imageName);
         $data['image'] = $imgPath;
         // create studio
-        auth()->user()->studio()->create($data);
+        $studio = auth()->user()->studio()->create($data);
+
+        // create owner signing through studio
+        $studio->signings()->create(['user_id' => auth()->user()->id]);
         return redirect('users');
     }
 

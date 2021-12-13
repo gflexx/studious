@@ -62,4 +62,8 @@ class User extends Authenticatable
         return $this->hasMany(CartItem::class, 'owner_id');
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class, 'owner_id');
+    }
+
 }

@@ -5,24 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Track extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'file',
+        'track_id',
         'owner_id',
-        'price'
+        'text',
     ];
 
     public function owner(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
+    public function track(){
+        return $this->belongsTo(Track::class, 'track_id');
     }
 }

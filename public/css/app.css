@@ -10,6 +10,13 @@
     height: 198px;
     width: 270px;
 }
+.studio-tack-img{
+    height: 135px;
+    width: 135px;
+}
+.studio-song{
+    background-color: rgb(47, 45, 49);
+}
 .img-studio{
     height: 54vh;
     width: fit-content;
@@ -17,4 +24,12 @@
 .track-image{
     height: 126px;
     width: 126px;
+}
+.comment{
+    background-color: rgb(79, 76, 82);
+    border-radius: 2.7px;
+}
+.comment-img{
+    height: 63px;
+    width: 63px;
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\UserController;
@@ -41,6 +42,10 @@ Route::get('track/show/{id}', [TrackController::class, 'showTrack'])->name('show
 Route::get('track/add', [TrackController::class, 'addTrack'])->name('add_track');
 
 Route::post('track/save', [TrackController::class, 'saveTrack'])->name('save_track');
+
+// comments
+
+Route::post('comments/add', [CommentController::class, 'addComment'])->name('add_comment');
 
 // users
 

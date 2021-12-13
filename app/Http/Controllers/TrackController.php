@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Track;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TrackController extends Controller
@@ -16,8 +18,13 @@ class TrackController extends Controller
 
     public function showTrack($id){
         $track = Track::findOrFail($id);
+        $comments = Comment::where('track_id', $track->id)
+            ->get()
+            ->reverse()
+            ->values();
         return view('tracks.show', [
             'track' => $track,
+            'comments' => $comments,
         ]);
     }
 
