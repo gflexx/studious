@@ -23,11 +23,11 @@ Route::get('/', function () {
 
 Route::get('studios/all', [StudioController::class, 'index'])->name('studios_all');
 
-Route::get('studio/add', [StudioController::class, 'createStudio'])->name('create_studio');
+Route::get('studio/add', [StudioController::class, 'createStudio'])->name('create_studio')->middleware(['auth']);
 
-Route::post('studio/save', [StudioController::class, 'saveStudio'])->name('save_studio');
+Route::post('studio/save', [StudioController::class, 'saveStudio'])->name('save_studio')->middleware(['auth']);
 
-Route::get('studio/edit/{id}', [StudioController::class, 'editStudio'])->name('edit_studio');
+Route::get('studio/edit/{id}', [StudioController::class, 'editStudio'])->name('edit_studio')->middleware(['auth']);
 
 Route::post('studio/edit/save', [StudioController::class, 'saveEdit'])->name('save_edit');
 
@@ -39,13 +39,13 @@ Route::get('tracks/all', [TrackController::class, 'index'])->name('tracks_all');
 
 Route::get('track/show/{id}', [TrackController::class, 'showTrack'])->name('show_track');
 
-Route::get('track/add', [TrackController::class, 'addTrack'])->name('add_track');
+Route::get('track/add', [TrackController::class, 'addTrack'])->name('add_track')->middleware(['auth']);
 
 Route::post('track/save', [TrackController::class, 'saveTrack'])->name('save_track');
 
 // comments
 
-Route::post('comments/add', [CommentController::class, 'addComment'])->name('add_comment');
+Route::post('comments/add', [CommentController::class, 'addComment'])->name('add_comment')->middleware(['auth']);
 
 // users
 

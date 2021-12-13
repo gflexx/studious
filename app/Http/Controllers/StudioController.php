@@ -20,7 +20,7 @@ class StudioController extends Controller
         $studio = Studio::findOrFail($id);
         $signings = Signing::where('studio_id', $studio->id)->get();
 
-        // create music array
+        // create user array
         $userArr = [];
 
         // get user from studio signing
@@ -57,7 +57,7 @@ class StudioController extends Controller
         // create studio
         $studio = auth()->user()->studio()->create($data);
 
-        // create owner signing through studio
+        // sign owner to studio
         $studio->signings()->create(['user_id' => auth()->user()->id]);
         return redirect('users');
     }
