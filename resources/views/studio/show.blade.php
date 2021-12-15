@@ -29,10 +29,13 @@
                 <div class="col">
                     <p class="text-white">{{ $track->title }}</p>
                     <p class="text-info">By: <span class="text-white">{{ $track->owner->username }}</span></p>
+                    <div class="py-0">
+                        <audio controls src="{{ asset($track->file) }}"></audio>
+                    </div>
                 </div>
             </div>
         @empty
-            <p class="text-white">no tracks available yet</p>
+            <p class="text-white">No tracks available yet</p>
         @endforelse
     </div>
 

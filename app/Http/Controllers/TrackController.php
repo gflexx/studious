@@ -36,7 +36,7 @@ class TrackController extends Controller
         $data = $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:png,jpg',
+            'image' => 'required|mimes:png,jpg,webp',
             'file' => 'required|mimes:mp3,wav,ogg,mp4',
             'price' => 'required|numeric'
         ]);
