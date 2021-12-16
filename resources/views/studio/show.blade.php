@@ -16,18 +16,23 @@
                 <p class="text-info">Owner: <span class="text-white">{{ $studio->owner->username }}</span></p>
                 <p class="text-info">Created: <span class="text-white">{{ $studio->created_at }}</span></p>
                 <p class="text-info">Artist Signings: <span class="text-white">{{ $studio->signings->count() }}</span></p>
+                <a href="" class="btn btn-primary">Message Studio Owner</a>
             </div>
         </div>
     </div>
     <div class="row mt-3 justify-content-center mb-5">
         <h3 class="text-white">Tracks</h3>
         @forelse ($tracks as $track)
-            <div class="row studio-song">
+            <div class="row studio-song mb-2">
                 <div class="col-4 col-md-2">
-                    <img src="{{ asset($track->image) }}" alt="" class="studio-tack-img rounded">
+                    <a style="text-decoration: none;" href="{{ route('show_track', $track->id) }}">
+                        <img src="{{ asset($track->image) }}" alt="" class="studio-tack-img rounded">
+                    </a>
                 </div>
                 <div class="col">
-                    <p class="text-white">{{ $track->title }}</p>
+                    <h5 class="text-white mb-0">
+                        <a style="text-decoration: none;" href="{{ route('show_track', $track->id) }}">{{ $track->title }}</a>
+                    </h5>
                     <p class="text-info">By: <span class="text-white">{{ $track->owner->username }}</span></p>
                     <div class="py-0">
                         <audio controls src="{{ asset($track->file) }}"></audio>

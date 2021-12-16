@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SignArtistController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,14 @@ Route::get('studio/edit/{id}', [StudioController::class, 'editStudio'])->name('e
 Route::post('studio/edit/save', [StudioController::class, 'saveEdit'])->name('save_edit');
 
 Route::get('studio/{id}', [StudioController::class, 'showStudio'])->name('show_studio');
+
+// signing of artists
+
+Route::get('studio/{id}/sign', [SignArtistController::class, 'signArtist'])->name('sign_artist');
+
+Route::post('studio/sign/save', [SignArtistController::class, 'saveSign'])->name('save_sign');
+
+Route::post('studio/sign/delete', [SignArtistController::class, 'unsignArtist'])->name('unsign_artist');
 
 // track
 

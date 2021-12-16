@@ -6,6 +6,9 @@
     height: 144px;
     width: 144px;
 }
+.track-card{
+    background-color: rgb(49, 64, 66);
+}
 .studio-img-h{
     height: 198px;
     width: 270px;
@@ -13,6 +16,9 @@
 .studio-tack-img{
     height: 135px;
     width: 135px;
+}
+.studio-card{
+    background-color: rgb(79, 76, 82);
 }
 .studio-song{
     background-color: rgb(47, 45, 49);
@@ -32,4 +38,15 @@
 .comment-img{
     height: 63px;
     width: 63px;
+}
+.small-img{
+    height: 63px;
+    width: 63px;
+}
+.signing-card{
+    background-color: rgb(79, 76, 82);
+}
+.xs-img{
+    height: 45px;
+    width: 45px;
 }

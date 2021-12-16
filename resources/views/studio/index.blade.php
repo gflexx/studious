@@ -8,7 +8,7 @@
     <div class="row g-2">
         @foreach ($studios as $studio)
             <div class="col-md-6">
-                <div class="card bg-dark mb-2">
+                <div class="card studio-card mb-2">
                     <div class="row">
                         <div class="col-3 col-md-4">
                             <a href="{{ route('show_studio', $studio->id) }}">

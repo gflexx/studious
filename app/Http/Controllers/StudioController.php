@@ -25,7 +25,7 @@ class StudioController extends Controller
 
         // get user from studio signing
         foreach($signings as $signing){
-            if(!in_array($signing->user, $userArr)){
+            if(!in_array($signing->user->id, $userArr)){
                 array_push($userArr, $signing->user->id);
             }
         }

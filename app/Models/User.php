@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function signing(){
-        return $this->hasOne(Signing::class, 'user_id');
+        return $this->hasMany(Signing::class, 'user_id');
     }
 
     public function carts(){

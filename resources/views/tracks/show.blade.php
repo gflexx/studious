@@ -55,6 +55,7 @@
                         <img src="{{ asset('user_images/'.$comment->owner->image) }}" class="comment-img rounded-circle">
                     </div>
                     <div class="col">
+                        <p class="text-info mb-0">{{ $comment->owner->username }}</p>
                         <p class="text-white">{{ $comment->text }}</p>
                     </div>
                 </div>
