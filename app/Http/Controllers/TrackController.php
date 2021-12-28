@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Signing;
+use App\Models\Studio;
 use App\Models\Track;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,5 +50,19 @@ class TrackController extends Controller
         $data['file'] = $filePath;
         auth()->user()->tracks()->create($data);
         return redirect('users');
+    }
+
+    public function trackOwner($id){
+        $owner = User::findOrFail($id);
+        $tracks = Track::where('owner_id', $owner->id)->get();
+        $signing = Signing::where('user_id', $owner->id);
+        // dd($signing->studio_id);
+        // $studio = Studio::where('studio_id', $signing->studio())->get();
+
+        return view('tracks.owner', [
+            'owner' => $owner,
+            'tracks' => $tracks,
+            'signing' => $signing,
+        ]);
     }
 }

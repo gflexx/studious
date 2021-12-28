@@ -52,6 +52,8 @@ Route::get('track/add', [TrackController::class, 'addTrack'])->name('add_track')
 
 Route::post('track/save', [TrackController::class, 'saveTrack'])->name('save_track');
 
+Route::get('tracks/owner/{id}', [TrackController::class, 'trackOwner'])->name('track_owner');
+
 // comments
 
 Route::post('comments/add', [CommentController::class, 'addComment'])->name('add_comment')->middleware(['auth']);

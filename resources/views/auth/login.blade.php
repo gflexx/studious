@@ -8,6 +8,11 @@
     <div class="row">
         <div class="col-7 col-md-5">
             <form class="p-5" action="{{ route('login_auth') }}" method="POST">
+                @if(session('status'))
+                    <div class="alert bg-secondary">
+                            <p class="text-white">{{ session('status') }}</p>
+                    </div>
+                @endif
                 @csrf
                 <div class="mb-3">
                     <label class="text-white" for="username">Username</label>
@@ -27,7 +32,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Login In</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </div>
 
             </form>
