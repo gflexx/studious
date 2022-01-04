@@ -18,15 +18,32 @@
             <p class="text-info">By: <span class="text-white">{{ $track->owner->username }}</span></p>
             @if ($track->owner->studio)
                 <p class="text-info">Studio:
-                    <span class="text-white">
+                    <span class="text-white h5">
                         @if ($track->owner->studio)
                             {{ $track->owner->studio->title }}
                         @endif
                     </span>
                 </p>
             @endif
+            @if (!$track->owner->studio && $signed_studio)
+            <p class="text-info">Signed to:
+                <span class="text-white h5">
+                    {{ $signed_studio[0]->title }} Studio
+                </span>
+            </p>
+            @endif
             <p class="text-info">Price: <span class="text-white">{{ $track->price }} KSHS.</span></p>
-            <button class="btn btn-primary">Add to Cart</button>
+            <div>
+                @if (auth()->check())
+                    @if (auth()->user()->id != $track->owner->id)
+                        <a href="{{ route('chat', $track->owner->id) }}" class="btn btn-success me-4">Send Message</a>
+                    @endif
+
+                    <button class="btn btn-primary">Add to Cart</button>
+                @else
+                    <p class="text-white">Please sign in to send message and add item to cart.</p>
+                @endif
+            </div>
         </div>
     </div>
     <div class="row justify-content-center mt-5">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SignArtistController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TrackController;
@@ -65,6 +66,12 @@ Route::get('users/', [UserController::class, 'profile'])->name('profile');
 Route::get('users/edit/{id}', [UserController::class, 'editProfile'])->name('edit_profile');
 
 Route::post('users/save', [UserController::class, 'saveEdit'])->name('save_edit');
+
+// messages
+
+Route::get('messages/chat/{id}', [MessagesController::class, 'chat'])->name('chat');
+
+Route::post('messages/save', [MessagesController::class, 'save'])->name('save_message');
 
 // auth
 

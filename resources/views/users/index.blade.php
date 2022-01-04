@@ -12,10 +12,15 @@
     <hr class="text-white">
     <div class="row">
         <div class="col-md-3">
-            <div class="card bg-dark">
+            <div class="card bg-secondary p-2">
                 <h6 class="text-white">
                     Messages:
                 </h6>
+                @forelse ($messages as $msg)
+
+                @empty
+                    <p class="text-white">No messages yet</p>
+                @endforelse
             </div>
 
         </div>
@@ -37,13 +42,34 @@
                         <a href="{{ route('edit_studio', $studio[0]->id) }}" class="btn btn-success">Edit Studio</a>
                         <a href="{{ route('sign_artist', $studio[0]->id) }}" class="btn btn-primary">Sign Artist to Studio</a>
                     @else
-                        <a href="{{ route('create_studio') }}" class="btn btn-success">Create Studio</a>
+                        @if (!$signed_studio)
+                            <a href="{{ route('create_studio') }}" class="btn btn-success">Create Studio</a>
+                        @endif
+
                     @endif
                 </div>
                 <div class="py-2">
                     <h5 class="text-white mt-3 mb-2">Studio</h5>
                     @if($studio->count() == 0)
-                        <p class="text-white">No Studio </p>
+                        @if ($signed_studio)
+                        <div class="card studio-card">
+                            <div class="row">
+                                <div class="col-3 col-md-2">
+                                    <a href="{{ route('show_studio', $signed_studio[0]->id) }}">
+                                        <img class="studio-img img-fluid" src="{{ asset($signed_studio[0]->image) }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a style="text-decoration: none;" class="h4 text-info" href="{{ route('show_studio', $signed_studio[0]->id) }}">{{ $signed_studio[0]->title }}</a>
+                                    <p class="text-info mt-2">About: <span class="text-white">{{ $signed_studio[0]->description }}</span></p>
+                                    <p class="text-info mt-1">Created: <span class="text-white">{{ $signed_studio[0]->created_at }}</span></p>
+                                    <p class="text-info mt-1">Signings: <span class="text-white">{{ $signed_studio[0]->signings()->count() }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        @else
+                            <p class="text-white">No Studio </p>
+                        @endif
                     @else
                         <div class="card studio-card">
                             <div class="row">

@@ -16,7 +16,10 @@
                 <p class="text-info">Owner: <span class="text-white">{{ $studio->owner->username }}</span></p>
                 <p class="text-info">Created: <span class="text-white">{{ $studio->created_at }}</span></p>
                 <p class="text-info">Artist Signings: <span class="text-white">{{ $studio->signings->count() }}</span></p>
-                <a href="" class="btn btn-primary">Message Studio Owner</a>
+                @if (auth()->user()->id != $studio->owner->id && auth()->check())
+                    <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
+                @endif
+
             </div>
         </div>
     </div>

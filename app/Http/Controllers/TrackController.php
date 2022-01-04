@@ -24,9 +24,22 @@ class TrackController extends Controller
             ->get()
             ->reverse()
             ->values();
+
+        // get signings related to user id
+        $owner = $track->owner_id;
+        $signing = Signing::where('user_id', $owner)->get();
+
+        $signed_studio = [];
+        foreach($signing as $signin){
+            if(!in_array($signin->studio, $signed_studio)){
+                array_push($signed_studio, $signin->studio);
+            }
+        }
+
         return view('tracks.show', [
             'track' => $track,
             'comments' => $comments,
+            'signed_studio' => $signed_studio
         ]);
     }
 

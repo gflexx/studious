@@ -20,10 +20,19 @@ class UserController extends Controller
         $tracks = Track::where('owner_id', $userId)->get();
         $studio = Studio::where('owner_id', $userId)->get();
         $signing = Signing::where('user_id', $userId)->get();
+        $signed_studio = [];
+        foreach($signing as $signin){
+            if(!in_array($signin->studio ,$signed_studio)){
+                array_push($signed_studio, $signin->studio);
+            }
+        }
+        $messages = [];
         return view('users.index', [
             'tracks' => $tracks,
             'studio' => $studio,
-            'signing' => $signing
+            'signing' => $signing,
+            'signed_studio' => $signed_studio,
+            'messages' => $messages,
         ]);
     }
 
