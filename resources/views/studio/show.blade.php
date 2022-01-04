@@ -18,9 +18,16 @@
                 <p class="text-info">Artist Signings: <span class="text-white">{{ $studio->signings->count() }}</span></p>
                 @if (auth()->user()->id != $studio->owner->id && auth()->check())
                     <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
+
+                    <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
                 @endif
 
             </div>
+        </div>
+        <div class="col p-2">
+            <h6 class="text-white">Notices:</h6>
+            <hr class="text-white">
+            <p class="text-white">No notices yet</p>
         </div>
     </div>
     <div class="row mt-3 justify-content-center mb-5">

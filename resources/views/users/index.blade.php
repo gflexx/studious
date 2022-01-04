@@ -23,6 +23,13 @@
                 @endforelse
             </div>
 
+            <div class="card bg-secondary p-2 mt-3">
+                <h6 class="text-white">
+                    Studio Session:
+                </h6>
+                <p class="text-white">No request or responses.</p>
+            </div>
+
         </div>
         <div class="col">
             <div class="py-2 mb-2">
@@ -39,8 +46,11 @@
                 <div class="p-2">
                     <a href="{{ route('add_track') }}" class="btn btn-info">Upload Track</a>
                     @if (!$studio->count() == 0)
+
                         <a href="{{ route('edit_studio', $studio[0]->id) }}" class="btn btn-success">Edit Studio</a>
                         <a href="{{ route('sign_artist', $studio[0]->id) }}" class="btn btn-primary">Sign Artist to Studio</a>
+                        <a href="#" class="btn btn-outline-primary">Add Notice</a>
+                        <a href="#" class="btn btn-outline-info">Studio Sessions</a>
                     @else
                         @if (!$signed_studio)
                             <a href="{{ route('create_studio') }}" class="btn btn-success">Create Studio</a>
