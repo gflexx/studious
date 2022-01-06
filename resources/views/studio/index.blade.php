@@ -17,9 +17,9 @@
                         </div>
                         <div class="col">
                             <a style="text-decoration: none;" class="h4 text-info" href="{{ route('show_studio', $studio->id) }}">{{ $studio->title }}</a>
-                            <p class="text-muted mt-2">About: <span class="text-white">{{ $studio->description }}</span></p>
-                            <p class="text-muted">Created <span class="text-white">{{ $studio->created_at }}</span></p>
-                            <p class="text-muted">Signings <span class="text-white">{{ $studio->signings()->count() }}</span></p>
+                            <p class="text-info mt-2">About: <span class="text-white">{{ $studio->description }}</span></p>
+                            <p class="text-info">Created <span class="text-white">{{ $studio->created_at }}</span></p>
+                            <p class="text-info">Signings <span class="text-white">{{ $studio->signings()->count() }}</span></p>
                         </div>
                     </div>
                 </div>

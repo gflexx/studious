@@ -48,7 +48,7 @@
                     @if (!$studio->count() == 0)
 
                         <a href="{{ route('edit_studio', $studio[0]->id) }}" class="btn btn-success">Edit Studio</a>
-                        <a href="{{ route('sign_artist', $studio[0]->id) }}" class="btn btn-primary">Sign Artist to Studio</a>
+                        <a href="{{ route('sign_artist', $studio[0]->id) }}" class="btn btn-primary">Studio Signings</a>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addNoticeModal">Add Notice</button>
 
                         <div class="modal fade" id="addNoticeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -67,7 +67,7 @@
             <hr class="text-white">
 
             <div class="mb-5">
-                @forelse ($comments as $comment)
+            @forelse ($comments as $comment)
                 <div class="row mb-2 comment">
                     <div class="col-3 col-md-1">
                         <img src="{{ asset('user_images/'.$comment->owner->image) }}" class="comment-img rounded-circle">

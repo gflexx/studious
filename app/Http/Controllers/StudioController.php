@@ -36,6 +36,7 @@ class StudioController extends Controller
         return view('studio.show', [
             'studio' => $studio,
             'tracks' => $tracks,
+            'signings' => $signings
         ]);
     }
 
