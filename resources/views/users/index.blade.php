@@ -49,8 +49,45 @@
 
                         <a href="{{ route('edit_studio', $studio[0]->id) }}" class="btn btn-success">Edit Studio</a>
                         <a href="{{ route('sign_artist', $studio[0]->id) }}" class="btn btn-primary">Sign Artist to Studio</a>
-                        <a href="#" class="btn btn-outline-primary">Add Notice</a>
-                        <a href="#" class="btn btn-outline-info">Studio Sessions</a>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addNoticeModal">Add Notice</button>
+
+                        <div class="modal fade" id="addNoticeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-dark text-white">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Add Notice</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Add notice to be displayed on studio wall.</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#studioSessionModal">Studio Sessions</button>
+
+                        <div class="modal fade" id="studioSessionModal" tabindex="-1" aria-labelledby="exampleLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-dark text-white">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleLabel">Studio Sessions</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Enable or disable studio session booking</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     @else
                         @if (!$signed_studio)
                             <a href="{{ route('create_studio') }}" class="btn btn-success">Create Studio</a>
