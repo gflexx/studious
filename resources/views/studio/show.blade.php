@@ -35,7 +35,11 @@
                                     <img src="{{ asset('user_images/'.$signing->user->image) }}" alt="" class="img-fluid rounded-circle sm-img">
                                 </div>
                                 <div class="col">
-                                    <h6 class="text-info mb-1">{{ $signing->user->username }}</h6>
+                                    <h6 class="text-info mb-1">
+                                        <a href="{{ route('track_owner', $signing->user->id) }}"
+                                            style="text-decoration: none; text-decoration-color: inherit;">
+                                        {{ $signing->user->username }}</a>
+                                    </h6>
                                     <p class="mb-1">Song Count: {{ $signing->user->tracks->count() }}</p>
                                 </div>
                             </div>

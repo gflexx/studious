@@ -16,6 +16,10 @@ class CreateNoticesTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('studio_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_visible')->default(1);
+            $table->string('image')->nullable();
+            $table->text('text');
         });
     }
 

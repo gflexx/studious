@@ -73,6 +73,18 @@ Route::get('messages/chat/{id}', [MessagesController::class, 'chat'])->name('cha
 
 Route::post('messages/save', [MessagesController::class, 'save'])->name('save_message');
 
+// notices
+
+Route::post('notices/create')->name('create_notice');
+
+Route::post('notices/delete')->name('delete_notice');
+
+// studio sessions
+
+Route::post('sessions/create')->name('create_session');
+
+Route::post('sessions/delete')->name('delete_session');
+
 // auth
 
 Route::get('register', [AuthController::class, 'register'])->name('register');
