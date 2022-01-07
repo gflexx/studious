@@ -58,6 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class, 'owner_id');
     }
 
+    public function sessions(){
+        return $this->hasMany(studio_session::class, 'user_id');
+    }
+
     public function cartItems(){
         return $this->hasMany(CartItem::class, 'owner_id');
     }

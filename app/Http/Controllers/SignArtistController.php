@@ -38,6 +38,7 @@ class SignArtistController extends Controller
         ]);
     }
 
+    // sign artist
     public function saveSign(Request $request){
         $data = $this->validate($request, [
             'user_id' => 'required',
@@ -46,13 +47,22 @@ class SignArtistController extends Controller
         $user_id = $request->user_id;
         $studio_id = $request->studio_id;
 
+        // find user then sign user
         $usr = User::find($user_id);
         $usr->signing()->create($data);
 
         return redirect()->route('sign_artist', $studio_id);
     }
 
+    // unsign artists
     public function unsignArtist(Request $request){
+        $sign_id  = $request->sign_id;
+        $studio_id = $request->studio_id;
 
+        // find sign then delete
+        $signing = Signing::findOrFail($sign_id);
+        $signing->delete();
+
+        return redirect()->route('sign_artist', $studio_id);
     }
 }

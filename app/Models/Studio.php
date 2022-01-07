@@ -23,4 +23,12 @@ class Studio extends Model
     public function signings(){
         return $this->hasMany(Signing::class, 'studio_id');
     }
+
+    public function notices(){
+        return $this->hasMany(Notice::class, 'studio_id');
+    }
+
+    public function sessions(){
+        return $this->hasMany(studio_session::class, 'studio_id');
+    }
 }

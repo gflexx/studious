@@ -16,7 +16,15 @@ class StudioSessionController extends Controller
 
     }
 
+    public function acceptSession(){
+
+    }
+
     public function deleteSession(){
+
+    }
+
+    public function rejectSession(){
 
     }
 }

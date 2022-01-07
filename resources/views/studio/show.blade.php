@@ -49,10 +49,14 @@
                     @endforelse
                 </div>
                 <br>
-                @if (auth()->user()->id != $studio->owner->id && auth()->check())
-                    <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
+                @if (auth()->check())
+                    @if (auth()->user()->id != $studio->owner->id)
+                        <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
 
-                    <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
+                    @endif
+                @else
+                    <p class="text-white">Please login to Send Mesage and Book Studio Session</p>
                 @endif
 
             </div>
@@ -60,7 +64,41 @@
         <div class="col p-2">
             <h6 class="text-white">Notices:</h6>
             <hr class="text-white">
-            <p class="text-white">No notices yet</p>
+            <div class="notices">
+                @forelse ($studio->notices as $notice)
+                    <div class="row gx-3 py-2">
+                        @if ($notice->text)
+                            <div class="col-9">
+                                <ul class="mb-2">
+                                    <li class="text-white h6">{{ $notice->text }}</li>
+                                </ul>
+                            </div>
+                        @elseif ($notice->image)
+                            <div class="col-9 mt-2 ">
+                                <ul class="mb-2">
+                                    <li class="text-center text-white">
+                                        <img class="notice-img img-fluid rounded" src="{{ asset('notices/'.$notice->image) }}" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="col">
+                            @if (auth()->check())
+                                @if (auth()->user()->id == $studio->owner->id)
+                                    <form action="{{ route('delete_notice') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="studio_id" value="{{ $studio->id }}">
+                                        <input type="hidden" name="notice_id" value="{{ $notice->id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-white">No notices yet</p>
+                @endforelse
+            </div>
         </div>
     </div>
     <div class="row mt-3 justify-content-center mb-5">

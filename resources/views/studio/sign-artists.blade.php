@@ -8,7 +8,7 @@
             <h5 class="text-white mb-3">Signed Artists:</h5>
             @foreach ($studio->signings as $signing)
                 <div class="row signing-card mb-2 py-1">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="text-center">
                             <img src="{{ asset('user_images/'.$signing->user->image) }}" alt="" class="small-img rounded-circle img-fluid">
                         </div>
@@ -16,8 +16,19 @@
                     <div class="col">
                         <p class="text-white mb-1">{{ $signing->user->username }}</p>
                         @if ($signing->user->id != auth()->user()->id)
-                            <a href="{{ route('chat', $signing->user->id) }}" class="btn btn-primary btn-sm me-1">Message</a>
-                            <a href="#" class="btn btn-danger btn-sm">Unsign</a>
+                            <div class="d-flex">
+                                <div>
+                                    <a href="{{ route('chat', $signing->user->id) }}" class="btn btn-primary btn-sm me-2">Message</a>
+                                </div>
+                                <div>
+                                    <form action="{{ route('unsign_artist') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="sign_id" value="{{ $signing->id }}">
+                                        <input type="hidden" name="studio_id" value="{{ $studio->id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Unsign</button>
+                                    </form>
+                                </div>
+                            </div>
                         @else
                             <p class="text-info">Me</p>
                         @endif

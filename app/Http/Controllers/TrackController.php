@@ -68,14 +68,23 @@ class TrackController extends Controller
     public function trackOwner($id){
         $owner = User::findOrFail($id);
         $tracks = Track::where('owner_id', $owner->id)->get();
-        $signing = Signing::where('user_id', $owner->id);
-        // dd($signing->studio_id);
-        // $studio = Studio::where('studio_id', $signing->studio())->get();
+        $signing = Signing::where('user_id', $owner->id)->get();
+        $studio = [];
+
+        // check if signing then add studio studio array
+        if($signing->count() > 0){
+            foreach($signing as $signin){
+                if(!in_array($signin->studio, $studio)){
+                    array_push($studio, $signin->studio);
+                }
+            }
+        }
 
         return view('tracks.owner', [
             'owner' => $owner,
             'tracks' => $tracks,
             'signing' => $signing,
+            'studio' => $studio,
         ]);
     }
 }

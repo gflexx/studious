@@ -16,7 +16,8 @@ class CreateStudioSessionsTable extends Migration
         Schema::create('studio_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('studio_id')->constrained()->onDelete('cascade');
-            $table->foreignId('owner_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_seen')->default(0);
             $table->boolean('is_accepted')->default(1);
             $table->timestamps();
         });

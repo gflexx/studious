@@ -10,8 +10,8 @@
     background-color: rgb(49, 64, 66);
 }
 .studio-img-h{
-    height: 270px;
-    width: 270px;
+    height: 207px;
+    width: 207px;
 }
 .studio-tack-img{
     height: 135px;
@@ -53,4 +53,8 @@
 .sm-img{
     height: 45px;
     width: 45px;
+}
+.notice-img{
+    height: 180px;
+    width: 180px;
 }

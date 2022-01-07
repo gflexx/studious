@@ -8,11 +8,17 @@
         <p class="text-info mb-1">Name: <span class="text-white">{{ $owner->username }}</span></p>
 
         @if ($signing)
-            <p class="text-info mb-1">Studio: <span class="text-white"></span></p>
+            <p class="text-info mb-1">Studio: <span class="text-white">{{ $studio[0]->title }}</span></p>
         @endif
 
         <p class="text-info mb-1">Tracks: <span class="text-white">{{ $tracks->count() }}</span></p>
-        <a href="#" class="btn btn-primary btn-sm mb-1">Send Message</a>
+        @if (auth()->check())
+            @if (auth()->user()->id != $owner->id)
+                <a href="{{ route('chat', $owner->id) }}" class="btn btn-primary btn-sm mb-1">Send Message</a>
+            @endif
+        @else
+            <p class="text-white">Please login to send message</p>
+        @endif
     </div>
     <hr class="text-white">
     <div class="row g-2">

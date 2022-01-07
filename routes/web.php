@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\SignArtistController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\TrackController;
@@ -75,15 +76,19 @@ Route::post('messages/save', [MessagesController::class, 'save'])->name('save_me
 
 // notices
 
-Route::post('notices/create')->name('create_notice');
+Route::post('notices/create', [NoticeController::class, 'createNotice'])->name('create_notice');
 
-Route::post('notices/delete')->name('delete_notice');
+Route::post('notices/delete', [NoticeController::class, 'deleteNotice'])->name('delete_notice');
 
 // studio sessions
 
-Route::post('sessions/create')->name('create_session');
+Route::post('sessions/create', [StudioSessionController::class, 'createSession'])->name('create_session');
 
-Route::post('sessions/delete')->name('delete_session');
+Route::post('sessions/accept', [StudioSessionController::class, 'acceptSession'])->name('accept_session');
+
+Route::post('sessions/reject', [StudioSessionController::class, 'rejectSession'])->name('reject_session');
+
+Route::post('sessions/delete', [StudioSessionController::class, 'deleteSession'])->name('delete_session');
 
 // auth
 

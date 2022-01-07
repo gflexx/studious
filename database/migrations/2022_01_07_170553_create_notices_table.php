@@ -19,7 +19,7 @@ class CreateNoticesTable extends Migration
             $table->foreignId('studio_id')->constrained()->onDelete('cascade');
             $table->boolean('is_visible')->default(1);
             $table->string('image')->nullable();
-            $table->text('text');
+            $table->text('text')->nullable();
         });
     }
 

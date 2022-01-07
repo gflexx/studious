@@ -60,10 +60,27 @@
                                 </div>
                                 <div class="modal-body">
                                   <p>Add notice to be displayed on studio wall.</p>
+                                  <div>
+                                      <form action="{{ route('create_notice') }}" method="post" class="mt-2" enctype="multipart/form-data">
+                                          @csrf
+                                          <input type="hidden" name="studio_id" value="{{ $studio[0]->id }}">
+
+                                          <div class="mb-3">
+                                            <label for="formFile" class="form-label">Image</label>
+                                            <input class="form-control" accept="image/*" name="image" type="file" id="formFile">
+                                          </div>
+
+                                          <div class="mb-3">
+                                            <label class="text-white" for="text">Text</label>
+                                            <textarea name="text" id="text" class="form-control" rows="2"></textarea>
+                                          </div>
+
+                                          <button type="submit" class="btn btn-primary btn-sm">Create Notice</button>
+                                      </form>
+                                  </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                               </div>
                             </div>
