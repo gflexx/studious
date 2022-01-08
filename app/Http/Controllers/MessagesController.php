@@ -17,7 +17,18 @@ class MessagesController extends Controller
     public function chat($id){
         $receiver = User::findOrFail($id);
         $user = Auth::user();
-        $messages = [];
+        $user_id = $user->id;
+        $receiver_id = $receiver->id;
+
+        // get messages related to user and receiver
+        $messages = Message::where([
+            ['sender_id', $user_id],
+            ['receiver_id', $receiver_id]
+        ])->orWhere([
+            ['sender_id', $receiver_id],
+            ['receiver_id', $user_id]
+        ])->get()->reverse();
+
         return view('messages.index', [
             'receiver' => $receiver,
             'user' => $user,
