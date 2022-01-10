@@ -21,11 +21,19 @@ class UserController extends Controller
         $studio = Studio::where('owner_id', $userId)->get();
         $signing = Signing::where('user_id', $userId)->get();
         $signed_studio = [];
+
+        // get signed studio then push to array
         foreach($signing as $signin){
             if(!in_array($signin->studio ,$signed_studio)){
                 array_push($signed_studio, $signin->studio);
             }
         }
+
+        // check if has studio then get session availability
+        if ($studio){
+
+        }
+
         $messages = [];
         return view('users.index', [
             'tracks' => $tracks,

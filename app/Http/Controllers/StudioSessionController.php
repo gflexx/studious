@@ -12,19 +12,19 @@ class StudioSessionController extends Controller
         $this->middleware('auth');
     }
 
-    public function createSession(){
+    public function createSession(Request $request){
 
     }
 
-    public function acceptSession(){
+    public function acceptSession(Request $request){
 
     }
 
-    public function deleteSession(){
+    public function deleteSession(Request $request){
 
     }
 
-    public function rejectSession(){
+    public function rejectSession(Request $request){
 
     }
 }

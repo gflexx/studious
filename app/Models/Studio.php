@@ -31,4 +31,8 @@ class Studio extends Model
     public function sessions(){
         return $this->hasMany(studio_session::class, 'studio_id');
     }
+
+    public function availability(){
+        return $this->hasOne(SessionAvailable::class, 'studio_id');
+    }
 }
