@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Signing;
 use App\Models\Studio;
 use App\Models\Track;
@@ -34,13 +35,35 @@ class UserController extends Controller
 
         }
 
-        $messages = [];
+        // get messages sent or received by user
+        $messages = Message::where([
+            ['sender_id', $userId]
+        ])->orWhere([
+            ['receiver_id', $userId]
+        ])->get()->reverse();
+
+        // contact array
+        $contactArr = [];
+
+        // get contacts from messages add to contact array
+        foreach($messages as $msg){
+            if($msg->sender_id == $userId){
+                if (!in_array($msg->receiver, $contactArr)){
+                    array_push($contactArr, $msg->receiver);
+                }
+            } else{
+                if (!in_array($msg->sender, $contactArr)){
+                    array_push($contactArr, $msg->sender);
+                }
+            }
+        }
+
         return view('users.index', [
             'tracks' => $tracks,
             'studio' => $studio,
             'signing' => $signing,
             'signed_studio' => $signed_studio,
-            'messages' => $messages,
+            'contacts' => $contactArr,
         ]);
     }
 

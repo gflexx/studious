@@ -12,23 +12,31 @@
     <hr class="text-white">
     <div class="row">
         <div class="col-md-3">
-            <div class="card bg-secondary p-2">
+            <div class="card bg-dark p-2 border px-3">
                 <h6 class="text-white">
                     Messages:
                 </h6>
-                @forelse ($messages as $msg)
-
+                @forelse ($contacts as $contact)
+                    <div class="row studio-song rounded mb-2 ">
+                        <div class="col-4">
+                            <img src="{{ asset('user_images/'. $contact->image) }}" class="small-img rounded-circle img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ route('chat', $contact->id) }}" style="text-decoration: none">{{ $contact->username }}</a>
+                        </div>
+                    </div>
                 @empty
                     <p class="text-white">No messages yet</p>
                 @endforelse
             </div>
-
-            <div class="card bg-secondary p-2 mt-3">
-                <h6 class="text-white">
-                    Studio Session:
-                </h6>
-                <p class="text-white">No request or responses.</p>
-            </div>
+            @if (!$studio->count() == 0)
+                <div class="card bg-dark border p-2 mt-3">
+                    <h6 class="text-white">
+                        Studio Session:
+                    </h6>
+                    <p class="text-white">No request or responses.</p>
+                </div>
+            @endif
 
         </div>
         <div class="col">
