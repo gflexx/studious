@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SessionAvailable;
 use App\Models\Signing;
 use App\Models\Studio;
 use App\Models\Track;
@@ -30,13 +31,16 @@ class StudioController extends Controller
             }
         }
 
+        $availability = SessionAvailable::firstOrCreate(['studio_id' => $studio->id]);
+
         // get tracks with user ids found
         $tracks = Track::whereIn('owner_id', $userArr)->get();
 
         return view('studio.show', [
             'studio' => $studio,
             'tracks' => $tracks,
-            'signings' => $signings
+            'signings' => $signings,
+            'availability' => $availability
         ]);
     }
 

@@ -17,7 +17,7 @@
                     Messages:
                 </h6>
                 @forelse ($contacts as $contact)
-                    <div class="row studio-song rounded mb-2 ">
+                    <div class="row track-card rounded mb-2 ">
                         <div class="col-4">
                             <img src="{{ asset('user_images/'. $contact->image) }}" class="small-img rounded-circle img-fluid" alt="">
                         </div>
@@ -105,10 +105,27 @@
                                 </div>
                                 <div class="modal-body">
                                   <p>Enable or disable studio session booking</p>
+                                  <form action="{{ route('session_availability') }}" method="post">
+                                      @csrf
+                                      <div class="form-check mb-3">
+                                        <input class="form-check-input" id="flexCheckDefault"
+                                            name="is_available"
+                                            type="checkbox"
+                                            @if ($session_available->is_available)
+                                                checked
+                                            @endif
+                                            >
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Is Available
+                                        </label>
+                                      </div>
+                                      <input type="hidden" name="studio_id" value="{{ $signed_studio[0]->id }}">
+                                      <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+                                  </form>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
+
                                 </div>
                               </div>
                             </div>

@@ -33,6 +33,6 @@ class Studio extends Model
     }
 
     public function availability(){
-        return $this->hasOne(SessionAvailable::class, 'studio_id');
+        return $this->hasMany(SessionAvailable::class, 'studio_id');
     }
 }

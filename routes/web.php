@@ -7,6 +7,7 @@ use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\SignArtistController;
 use App\Http\Controllers\StudioController;
+use App\Http\Controllers\StudioSessionController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\UserController;
 use App\Models\Studio;
@@ -81,6 +82,8 @@ Route::post('notices/create', [NoticeController::class, 'createNotice'])->name('
 Route::post('notices/delete', [NoticeController::class, 'deleteNotice'])->name('delete_notice');
 
 // studio sessions
+
+Route::post('sessions/availability', [StudioSessionController::class, 'updateAvailability'])->name('session_availability');
 
 Route::post('sessions/create', [StudioSessionController::class, 'createSession'])->name('create_session');
 

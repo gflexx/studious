@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\SessionAvailable;
 use App\Models\Signing;
 use App\Models\Studio;
 use App\Models\Track;
@@ -30,9 +31,10 @@ class UserController extends Controller
             }
         }
 
+        $session_available = [];
         // check if has studio then get session availability
-        if ($studio){
-
+        if ($studio->count() > 0){
+            $session_available = SessionAvailable::firstOrCreate(['studio_id' => $signed_studio[0]->id]);
         }
 
         // get messages sent or received by user
@@ -64,6 +66,7 @@ class UserController extends Controller
             'signing' => $signing,
             'signed_studio' => $signed_studio,
             'contacts' => $contactArr,
+            'session_available' => $session_available
         ]);
     }
 

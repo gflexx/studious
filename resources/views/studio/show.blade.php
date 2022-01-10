@@ -52,8 +52,12 @@
                 @if (auth()->check())
                     @if (auth()->user()->id != $studio->owner->id)
                         <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
+                        @if ($availability->is_available)
+                            <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
+                        @else
+                            <p class="text-white mt-3">Studio is not available for session booking</p>
+                        @endif
 
-                        <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
                     @endif
                 @else
                     <p class="text-white">Please login to Send Mesage and Book Studio Session</p>
