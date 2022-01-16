@@ -13,7 +13,8 @@ class Studio extends Model
         'title',
         'description',
         'image',
-        'owner_id'
+        'owner_id',
+        'session_fees'
     ];
 
     public function owner(){

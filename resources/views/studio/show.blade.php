@@ -3,6 +3,12 @@
 @section('content')
 
 <div class="">
+    @if (session('status'))
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <p class="mb-1">{{ session('status') }}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    @endif
     <div class="row">
         <div class="col-md-4">
             <div class="text-center">
@@ -53,7 +59,7 @@
                     @if (auth()->user()->id != $studio->owner->id)
                         <a href="{{ route('chat', $studio->owner->id) }}" class="btn btn-primary">Message Studio Owner</a>
                         @if ($availability->is_available)
-                            <a href="#" class="btn btn-outline-success mt-3">Book Studio Session</a>
+                            <a href="{{ route('create_session', $studio->id) }}" class="btn btn-outline-success mt-3">Book Studio Session</a>
                         @else
                             <p class="text-white mt-3">Studio is not available for session booking</p>
                         @endif

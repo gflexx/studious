@@ -9,8 +9,8 @@
         <div class="col-7 col-md-5">
             <form class="p-5" action="{{ route('login_auth') }}" method="POST">
                 @if(session('status'))
-                    <div class="alert bg-secondary">
-                            <p class="text-white">{{ session('status') }}</p>
+                    <div class="alert-secondary">
+                            <p>{{ session('status') }}</p>
                     </div>
                 @endif
                 @csrf

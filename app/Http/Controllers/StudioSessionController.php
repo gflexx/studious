@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SessionAvailable;
+use App\Models\Studio;
 use Illuminate\Http\Request;
 
 class StudioSessionController extends Controller
@@ -13,8 +14,12 @@ class StudioSessionController extends Controller
         $this->middleware('auth');
     }
 
-    public function createSession(Request $request){
+    public function createSession($id){
+        $studio = Studio::findOrFail($id);
 
+        return view('studio.book', [
+            'studio' => $studio,
+        ]);
     }
 
     public function updateAvailability(Request $request){
@@ -35,6 +40,19 @@ class StudioSessionController extends Controller
 
     public function acceptSession(Request $request){
 
+    }
+
+    public function saveSession(Request $request){
+        $studio_id = $request->studio_id;
+        $user_id = $request->user_id;
+        $phonenumber = $request->phonenumber;
+
+        // get studio and save studio session
+        $studio = Studio::findOrFail($studio_id);
+        $studio->sessions()->create(['user_id' => $user_id]);
+
+        return redirect()->route('show_studio', ['id' => $studio_id])
+        ->with('status', 'The studio will send you a message with your session details.');
     }
 
     public function deleteSession(Request $request){

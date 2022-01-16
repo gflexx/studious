@@ -67,11 +67,39 @@ class StudioController extends Controller
         return redirect('users');
     }
 
-    public function editStudio(){
-        return view('studio.edit');
+    public function editStudio($id){
+        $studio = Studio::findOrFail($id);
+
+        return view('studio.edit', [
+            'studio' => $studio,
+        ]);
     }
 
-    public function saveEdit(){
+    public function saveEdit(Request $request){
+        $studio_id = $request->studio_id;
+        $studio = Studio::find($studio_id);
+
+        // validate input
+        $data = $this->validate($request, [
+            'title' => 'required',
+            'session_fees' => 'required',
+            'description' => 'required'
+        ]);
+
+        if($request->image)
+        {
+            $imgName =  $request->file('image')->getClientOriginalName();
+            // save file to storage
+            $imgPath = $request->file('image')->move('studios', $imgName);
+            // save image to array
+            $imgArr = ['image' => $imgPath];
+        }
+
+        $studio->update(
+            array_merge($data, $imgArr ?? [])
+        );
+
+        return redirect('users');
 
     }
 }

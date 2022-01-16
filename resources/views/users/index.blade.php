@@ -18,7 +18,7 @@
                 </h6>
                 @forelse ($contacts as $contact)
                     <div class="row track-card rounded mb-2 ">
-                        <div class="col-4">
+                        <div class="col-5">
                             <img src="{{ asset('user_images/'. $contact->image) }}" class="small-img rounded-circle img-fluid" alt="">
                         </div>
                         <div class="col-6">
@@ -29,14 +29,34 @@
                     <p class="text-white">No messages yet</p>
                 @endforelse
             </div>
-            @if (!$studio->count() == 0)
-                <div class="card bg-dark border p-2 mt-3">
-                    <h6 class="text-white">
-                        Studio Session:
-                    </h6>
-                    <p class="text-white">No request or responses.</p>
-                </div>
-            @endif
+            <div class="card bg-dark border p-2 mt-3 px-3">
+                <h6 class="text-white">
+                    Studio Sessions:
+                </h6>
+                @forelse ($studio_sessions as $studio_session)
+                    <div class="row studio-card rounded mb-2">
+                        @if (!$studio->count() == 0)
+                            <div class="col-5">
+                                <img src="{{ asset('user_images/'. $studio_session->user->image) }}" class="small-img rounded-circle img-fluid" alt="">
+                            </div>
+
+                            <div class="col-6">
+                                <a href="{{ route('chat', $studio_session->user->id) }}" style="text-decoration: none">{{ $studio_session->user->username }}</a>
+                            </div>
+                        @else
+                            <div class="col-4">
+                                <img src="{{ asset($studio_session->studio->image) }}" class="small-img rounded-circle img-fluid" alt="">
+                            </div>
+
+                            <div class="col-6">
+                                <a href="{{ route('chat', $studio_session->studio->owner->id) }}" style="text-decoration: none">{{ $studio_session->studio->title }}</a>
+                            </div>
+                        @endif
+                    </div>
+                @empty
+                <p class="text-white">No studio session request.</p>
+                @endforelse
+            </div>
 
         </div>
         <div class="col">

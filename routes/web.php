@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\NoticeController;
@@ -33,7 +34,7 @@ Route::post('studio/save', [StudioController::class, 'saveStudio'])->name('save_
 
 Route::get('studio/edit/{id}', [StudioController::class, 'editStudio'])->name('edit_studio')->middleware(['auth']);
 
-Route::post('studio/edit/save', [StudioController::class, 'saveEdit'])->name('save_edit');
+Route::post('studio/edit/save', [StudioController::class, 'saveEdit'])->name('save_studio_edit');
 
 Route::get('studio/{id}', [StudioController::class, 'showStudio'])->name('show_studio');
 
@@ -85,13 +86,13 @@ Route::post('notices/delete', [NoticeController::class, 'deleteNotice'])->name('
 
 Route::post('sessions/availability', [StudioSessionController::class, 'updateAvailability'])->name('session_availability');
 
-Route::post('sessions/create', [StudioSessionController::class, 'createSession'])->name('create_session');
+Route::get('studio/{id}/session/create', [StudioSessionController::class, 'createSession'])->name('create_session');
+
+Route::post('sessions/save', [StudioSessionController::class, 'saveSession'])->name('save_session');
 
 Route::post('sessions/accept', [StudioSessionController::class, 'acceptSession'])->name('accept_session');
 
 Route::post('sessions/reject', [StudioSessionController::class, 'rejectSession'])->name('reject_session');
-
-Route::post('sessions/delete', [StudioSessionController::class, 'deleteSession'])->name('delete_session');
 
 // auth
 
@@ -112,3 +113,9 @@ Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart_add');
 
 Route::post('cart/remove', [CartController::class, 'removeFromCart'])->name('cart_remove');
+
+// checkout
+
+Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
+Route::get('checkout/finish', [CheckoutController::class, 'finishCheckout'])->name('checkout_finish');

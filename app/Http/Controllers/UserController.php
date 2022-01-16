@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\SessionAvailable;
 use App\Models\Signing;
 use App\Models\Studio;
+use App\Models\studio_session;
 use App\Models\Track;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class UserController extends Controller
         $studio = Studio::where('owner_id', $userId)->get();
         $signing = Signing::where('user_id', $userId)->get();
         $signed_studio = [];
+        $studio_sessions = [];
 
         // get signed studio then push to array
         foreach($signing as $signin){
@@ -32,10 +34,15 @@ class UserController extends Controller
         }
 
         $session_available = [];
-        // check if has studio then get session availability
+        // check if has studio then get session availability and sessions
         if ($studio->count() > 0){
             $session_available = SessionAvailable::firstOrCreate(['studio_id' => $signed_studio[0]->id]);
+            $studio_sessions = studio_session::where('studio_id', $signed_studio[0]->id)->get();
+        } else{
+            // get user sessions
+            $studio_sessions = studio_session::where('user_id', $userId)->get();
         }
+
 
         // get messages sent or received by user
         $messages = Message::where([
@@ -66,7 +73,8 @@ class UserController extends Controller
             'signing' => $signing,
             'signed_studio' => $signed_studio,
             'contacts' => $contactArr,
-            'session_available' => $session_available
+            'session_available' => $session_available,
+            'studio_sessions' => $studio_sessions,
         ]);
     }
 
