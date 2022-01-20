@@ -118,11 +118,48 @@ class CartController extends Controller
             }
             return redirect()->route('show_track', [$track->id]);
         }
-
-
     }
 
     public function removeFromCart(Request $request){
         $item_id = $request->track_id;
+        $cart_id = session()->get('cart_id');
+        $track = Track::find($item_id);
+
+        // check if cart exists
+        if($cart_id != null){
+            $cost = $track->price;
+            $cart = Cart::find($cart_id);
+            $cart_items = session()->get('cart_items');
+
+            // check if item in cart items
+            $item_in_cart = in_array($track->id, $cart_items);
+            if($item_in_cart){
+                // remove item from cart items session array
+                $key = array_search($track->id, $cart_items);
+                unset($cart_items[$key]);
+
+                // get and delete cartitem from db
+                $item = CartItem::where([
+                    ['cart_id', $cart->id],
+                    ['track_id', $track->id]
+                ])->get();
+
+                foreach($item as $itm){
+                    $itm->delete();
+                }
+
+                // update cart total
+                $cart_total = $cart->total;
+                $total = $cart_total - $cost;
+                $cart->total = $total;
+                $cart->save();
+
+                // update session cart values
+                session()->put('cart_items', $cart_items);
+                session()->put('num_cart_items', count($cart_items));
+                session()->put('cart_total', $cart->total);
+            }
+        }
+        return redirect('cart');
     }
 }

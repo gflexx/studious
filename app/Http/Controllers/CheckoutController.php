@@ -12,6 +12,7 @@ class CheckoutController extends Controller
     }
 
     public function checkout(){
+
         return view('checkout.index', [
 
         ]);
