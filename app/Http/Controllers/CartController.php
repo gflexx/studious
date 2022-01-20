@@ -51,17 +51,19 @@ class CartController extends Controller
         // check if session has cart id
         if ($cart_id == null) {
             // create cart
-            $cart = Cart::create(
-                'owner_id', $user,
-            );
+            $cart = Cart::create([
+                'owner_id' => $user,
+            ]);
 
             // put cart id to session
             session()->put('cart_id', $cart->id);
-            $cart->cartItem->create([
-                'user_id', $user,
-                'track_id', $track->id,
-                'cost', $cost
-            ]);
+            $data = array(
+                'cart_id' => $cart->id,
+                'owner_id' => $user,
+                'track_id' => $track->id,
+                'cost' => $cost
+            );
+            $cartItem = CartItem::create($data);
 
             // save cart total
             $cart->total = $cost;
@@ -74,24 +76,47 @@ class CartController extends Controller
             $items = [];
             array_push($items, $track->id);
             session()->put('cart_items', $items);
-
-            return redirect()->route('show_track', ['id', $track->id]);
+            session()->put('num_cart_items', count($items));
+            return redirect()->route('show_track', [$track->id]);
         } else {
-            $cart_items = session()->get('cart_items');
-
             // get cart and total
             $cart = Cart::find($cart_id);
             $cart_total = $cart->total;
+
+            // get cart items
+            $items = $cart->cartItem->all();
+            $cart_items = array();
+            foreach($items as $item){
+                if(!in_array($item->track_id, $cart_items)){
+                    array_push($cart_items, $item->track_id);
+                }
+            }
 
             // check if item in cart items
             $item_in_cart = in_array($track->id, $cart_items);
 
             // if not in array add cart item
             if(!$item_in_cart){
+                $data = array(
+                    'cart_id' => $cart->id,
+                    'owner_id' => $user,
+                    'track_id' => $track->id,
+                    'cost' => $cost
+                );
+                $cartItem = CartItem::create($data);
 
+                // put item in session cart items
+                array_push($cart_items, $track->id);
+                session()->put('cart_items', $cart_items);
+                session()->put('num_cart_items', count($cart_items));
+
+                // add cost and put in session
+                $total = $cart_total + $cost;
+                $cart->total = $total;
+                $cart->save();
+                session()->put('cart_total', $cart->total);
             }
-
-            // add cost and put in session
+            return redirect()->route('show_track', [$track->id]);
         }
 
 

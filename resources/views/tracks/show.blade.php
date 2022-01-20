@@ -33,13 +33,22 @@
             </p>
             @endif
             <p class="text-info">Price: <span class="text-white">{{ $track->price }} KSHS.</span></p>
-            <div>
+            <div class="d-flex">
                 @if (auth()->check())
                     @if (auth()->user()->id != $track->owner->id)
-                        <a href="{{ route('chat', $track->owner->id) }}" class="btn btn-success me-4">Send Message</a>
+                        <div>
+                            <a href="{{ route('chat', $track->owner->id) }}" class="btn btn-success me-4">Send Message</a>
+                        </div>
                     @endif
 
-                    <button class="btn btn-primary">Add to Cart</button>
+                    <div>
+                        <form action="{{ route('cart_add') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="track_id" value="{{ $track->id }}">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+
                 @else
                     <p class="text-white">Please sign in to send message and add item to cart.</p>
                 @endif

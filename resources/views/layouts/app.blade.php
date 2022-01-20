@@ -23,11 +23,18 @@
                         <a class="nav-link" href="{{ route('studios_all') }}">Studios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('tracks_all') }}">Tracks</a>
+                        <a class="nav-link" href="{{ route('tracks_all') }}">
+                            Tracks
+                        </a>
                     </li>
                     @if (auth()->check())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart') }}">Cart</a>
+                            <a class="nav-link" href="{{ route('cart') }}">
+                                Cart
+                                @if(session('num_cart_items'))
+                                    <span class="text-white">( {{ session('num_cart_items') }} )</span>
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>

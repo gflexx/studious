@@ -7,14 +7,14 @@
     <h4 class="text-white">Cart</h4>
     <hr class="text-white">
     @forelse ($cart_items as $cart_item)
-        <div class="row bg-dark border rounded mb-2 text-center">
+        <div class="row bg-dark border justify-content-center rounded mb-2 text-center">
             <div class="col-3">
-                <img class="small-img rounded-circle img-fluid" src="{{ $cart_item->track->image }}" alt="">
+                <img style="height: 72px; width: 72px;" class="rounded img-fluid" src="{{ $cart_item->track->image }}" alt="">
             </div>
-            <div class="col-3">
+            <div class="col-3 py-3">
                 <a href="{{ route('show_track', $cart_item->track->id) }}">{{ $cart_item->track->title }}</a>
             </div>
-            <div class="col-3">
+            <div class="col-3 py-3">
                 <form action="{{ route('cart_remove') }}" method="post">
                     @csrf
                     <input type="hidden" name="track_id" value="{{ $cart_item->track->id }}">
