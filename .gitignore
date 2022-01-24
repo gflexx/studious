@@ -7,6 +7,7 @@
 /public/tracks
 /public/user_images
 /public/notices
+/public/assets
 /vendor
 .env
 .env.backup

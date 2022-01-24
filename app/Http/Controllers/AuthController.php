@@ -32,6 +32,12 @@ class AuthController extends Controller
     public function logout(){
         // logout
         Auth::logout();
+
+        //sanitize session
+        session()->remove('cart_id');
+        session()->remove('cart_items');
+        session()->remove('num_cart_items');
+
         return redirect('/');
     }
 

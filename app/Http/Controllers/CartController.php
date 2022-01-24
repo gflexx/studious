@@ -15,10 +15,10 @@ class CartController extends Controller
     }
 
     public function index(){
-        $cart = Cart::where('owner_id', auth()->user()->id)
-        ->orWhere(['checked_out' => 0])
-        ->get()
-        ->reverse();
+        $cart = Cart::where([
+            ['owner_id', auth()->user()->id],
+            ['checked_out', 0]
+        ])->get()->reverse();
 
         // cart id array
         $cart_id = [];
@@ -42,6 +42,7 @@ class CartController extends Controller
         ]);
     }
 
+    // add item to cart
     public function addToCart(Request $request){
         $item_id = $request->track_id;
         $cart_id = session()->get('cart_id');
@@ -120,6 +121,7 @@ class CartController extends Controller
         }
     }
 
+    // remove item from cart
     public function removeFromCart(Request $request){
         $item_id = $request->track_id;
         $cart_id = session()->get('cart_id');

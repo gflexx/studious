@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Message;
 use App\Models\SessionAvailable;
 use App\Models\Signing;
@@ -25,6 +27,36 @@ class UserController extends Controller
         $signing = Signing::where('user_id', $userId)->get();
         $signed_studio = [];
         $studio_sessions = [];
+        $user = User::find($userId);
+
+        // get cart associated with user
+        $cart = Cart::where([
+            ['owner_id', auth()->user()->id],
+            ['checked_out', 0]
+        ])
+        ->get()
+        ->reverse();
+
+        // cart id array
+        $cart_id = [];
+
+        // check if cart is not null add cart id to array
+        if(count($cart) > 0){
+            foreach($cart as $cart){
+                array_push($cart_id, $cart->id);
+            }
+            // get items associated to a cart
+            $cartItems = CartItem::where('cart_id', $cart_id[0])->get();
+            $cart_items = [];
+            foreach($cartItems as $item){
+                array_push($cart_items, $item->track_id);
+            }
+
+            // add session data
+            session()->put('cart_id', $cart_id[0]);
+            session()->put('cart_items', $cart_items);
+            session()->put('num_cart_items', $cartItems->count());
+        }
 
         // get signed studio then push to array
         foreach($signing as $signin){
@@ -97,7 +129,9 @@ class UserController extends Controller
             $img = ['image' => $imgName];
         }
         // update details
-        auth()->user()->update(array_merge(
+        $usr = auth()->user()->id;
+        $user = User::find($usr);
+        $user->update(array_merge(
             $data,
             $img ?? []
         ));

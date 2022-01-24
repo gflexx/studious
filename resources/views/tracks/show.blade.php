@@ -11,7 +11,7 @@
         <div class="col">
             <h4 class="text-white">{{ $track->title }}</h4>
             <div class="py-3">
-                <audio controls src="{{ asset($track->file) }}"></audio>
+                <audio controls controlsList="nodownload" src="{{ asset($track->file) }}"></audio>
             </div>
             <p class="text-info">Description: <span class="text-white">{{ $track->description }}</span></p>
             <p class="text-info">Added: <span class="text-white">{{ $track->created_at }}</span></p>
@@ -45,7 +45,15 @@
                         <form action="{{ route('cart_add') }}" method="post">
                             @csrf
                             <input type="hidden" name="track_id" value="{{ $track->id }}">
-                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                @if (in_array($track->id, session()->get('cart_items'))) )
+                                    disabled
+                                @endif
+                                >
+                                Add to Cart
+                            </button>
                         </form>
                     </div>
 
