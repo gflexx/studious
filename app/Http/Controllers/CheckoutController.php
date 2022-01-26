@@ -46,18 +46,25 @@ class CheckoutController extends Controller
 
     public function payment(Request $request){
 
-        return redirect('checkout_finish');
+        return redirect('checkout/finish');
     }
 
     public function finishCheckout(){
-        // create zip archive
-        $zip = new ZipArchive;
-        $temp = 'assets/tract_itmes,zip';
 
         // get cart and cart items
         $cart_id = session()->get('cart_id');
         $cart = Cart::find($cart_id);
-        $cart_items = $cart->cartItems->all();
+
+        return view('checkout.finish', [
+            'cart_id' => $cart->id,
+        ]);
+    }
+
+    public function download(Request $request){
+        // get cart and items
+        $cart_id = $request->cart_id;
+        $cart = Cart::find($cart_id);
+        $cart_items = CartItem::where('cart_id', $cart->id)->get();;
 
         // add cart item file and image to media array
         $cart_media = [];
@@ -66,8 +73,12 @@ class CheckoutController extends Controller
             array_push($cart_media, $item->track->file);
         }
 
-        // create zip and download
-        if($zip->open($temp, ZipArchive::CREATE)){
+        // create zip archive
+        $zip = new ZipArchive;
+        $temp = 'assets/tract_items.zip';
+
+         // create zip and download
+         if($zip->open($temp, ZipArchive::CREATE)){
             foreach($cart_media as $media){
                 $zip->addFile($media);
             }
@@ -76,6 +87,5 @@ class CheckoutController extends Controller
             header('Content-type: application/zip');
             readfile($temp);
         }
-        return view();
     }
 }

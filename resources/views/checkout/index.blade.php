@@ -27,7 +27,7 @@
         </div>
         <div class="col-11 col-md-6 text-white p-5">
             @if ($cartItems->count() > 0)
-                <form class="px-3" action="" method="post">
+                <form class="px-3" action="{{ route('checkout_payment') }}" method="post">
                     @csrf
                     <h5 class="mb-3 text-center">Pay with Mpesa</h5>
                     <p class="text-center">Total:  {{ $cart->total  }}  Kshs.</p>

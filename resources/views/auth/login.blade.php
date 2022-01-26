@@ -8,6 +8,7 @@
     <div class="row">
         <div class="col-7 col-md-5">
             <form class="p-5" action="{{ route('login_auth') }}" method="POST">
+                @csrf
                 @if(session('status'))
                     <div class="alert-secondary">
                             <p>{{ session('status') }}</p>

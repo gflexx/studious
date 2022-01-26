@@ -118,4 +118,8 @@ Route::post('cart/remove', [CartController::class, 'removeFromCart'])->name('car
 
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
+Route::post('checkout/payment', [CheckoutController::class, 'payment'])->name('checkout_payment');
+
+Route::post('checkout/download', [CheckoutController::class, 'download'])->name('download');
+
 Route::get('checkout/finish', [CheckoutController::class, 'finishCheckout'])->name('checkout_finish');
