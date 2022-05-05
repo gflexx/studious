@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{{ route('cart') }}">
                                 Cart
                                 @if(session('num_cart_items'))
-                                    <span class="text-white">( {{ session('num_cart_items') }} )</span>
+                                    <span class="text-white num_cart_items">( {{ session('num_cart_items') }} )</span>
                                 @endif
                             </a>
                         </li>

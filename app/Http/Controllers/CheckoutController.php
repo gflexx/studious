@@ -50,32 +50,37 @@ class CheckoutController extends Controller
     }
 
     public function finishCheckout(){
-
-        // get cart and cart items
+        session()->forget('num_cart_items');
+        // get cart and cart items check it out
         $cart_id = session()->get('cart_id');
-        $cart = Cart::find($cart_id);
+        if($cart_id != null){
+            $cart = Cart::find($cart_id);
+            $cart->checked_out = true;
+            $cart->save();
+            $cart_items = CartItem::where('cart_id', $cart->id)->get();
 
-        return view('checkout.finish', [
-            'cart_id' => $cart->id,
-        ]);
+            // add cart item file and image to media array
+            $cart_media = [];
+            foreach($cart_items as $item){
+                array_push($cart_media, $item->track->image);
+                array_push($cart_media, $item->track->file);
+            }
+
+            // put the media to the session for download
+            session()->put('download_items', $cart_media);
+        }
+
+
+        return view('checkout.finish');
     }
 
     public function download(Request $request){
-        // get cart and items
-        $cart_id = $request->cart_id;
-        $cart = Cart::find($cart_id);
-        $cart_items = CartItem::where('cart_id', $cart->id)->get();;
-
-        // add cart item file and image to media array
-        $cart_media = [];
-        foreach($cart_items as $item){
-            array_push($cart_media, $item->track->image);
-            array_push($cart_media, $item->track->file);
-        }
+        $cart_media = session()->get('download_items');
 
         // create zip archive
         $zip = new ZipArchive;
         $temp = 'assets/tract_items.zip';
+
 
          // create zip and download
          if($zip->open($temp, ZipArchive::CREATE)){
@@ -85,7 +90,15 @@ class CheckoutController extends Controller
             $zip->close();
             header('Content-disposition: attachement; filename = track_files.zip');
             header('Content-type: application/zip');
+
+            // sanitize session
+            session()->forget('cart_id');
+            session()->forget('cart_items');
+            session()->forget('num_cart_items');
+
             readfile($temp);
         }
+
+
     }
 }

@@ -22,7 +22,7 @@ Route::get('/', function () {
         'studios' => $studios,
         'tracks' => $tracks
     ]);
-});
+})->name('home');
 
 // studio
 

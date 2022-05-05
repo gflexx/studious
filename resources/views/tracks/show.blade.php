@@ -48,9 +48,6 @@
                             <button
                                 type="submit"
                                 class="btn btn-primary"
-                                @if (in_array($track->id, session()->get('cart_items'))) )
-                                    disabled
-                                @endif
                                 >
                                 Add to Cart
                             </button>

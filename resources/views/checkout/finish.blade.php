@@ -8,9 +8,12 @@
     <hr class="text-white">
     <form action="{{ route('download') }}" method="post">
         @csrf
-        <input type="hidden" name="cart_id" value="{{ $cart_id }}">
         <button type="submit" class="btn btn-success">Download Assets</button>
     </form>
+
+    <div class="mt-3">
+        <a href="{{ route('home') }}" class="btn btn-primary">Go To Home Page</a>
+    </div>
 
 </div>
 

@@ -46,7 +46,9 @@ class UserController extends Controller
                 array_push($cart_id, $cart->id);
             }
             // get items associated to a cart
-            $cartItems = CartItem::where('cart_id', $cart_id[0])->get();
+            $cartItems = CartItem::where([
+                ['cart_id', $cart_id[0]],
+            ])->get();
             $cart_items = [];
             foreach($cartItems as $item){
                 array_push($cart_items, $item->track_id);
