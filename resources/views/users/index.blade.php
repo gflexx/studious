@@ -94,11 +94,6 @@
                                           <input type="hidden" name="studio_id" value="{{ $studio[0]->id }}">
 
                                           <div class="mb-3">
-                                            <label for="formFile" class="form-label">Image</label>
-                                            <input class="form-control" accept="image/*" name="image" type="file" id="formFile">
-                                          </div>
-
-                                          <div class="mb-3">
                                             <label class="text-white" for="text">Text</label>
                                             <textarea name="text" id="text" class="form-control" rows="2"></textarea>
                                           </div>
@@ -189,9 +184,10 @@
                                 </div>
                                 <div class="col">
                                     <a style="text-decoration: none;" class="h4 text-info" href="{{ route('show_studio', $studio[0]->id) }}">{{ $studio[0]->title }}</a>
-                                    <p class="text-info mt-2">About: <span class="text-white">{{ $studio[0]->description }}</span></p>
-                                    <p class="text-info mt-1">Created: <span class="text-white">{{ $studio[0]->created_at }}</span></p>
-                                    <p class="text-info mt-1">Signings: <span class="text-white">{{ $studio[0]->signings()->count() }}</span></p>
+                                    <p class="text-info mt-2 mb-0">About: <span class="text-white">{{ $studio[0]->description }}</span></p>
+                                    <p class="text-info mb-0">Created: <span class="text-white">{{ $studio[0]->created_at }}</span></p>
+                                    <p class="text-info mb-0">Fees: <span class="text-white">{{ $studio[0]->session_fees }}</span></p>
+                                    <p class="text-info mb-0">Signings: <span class="text-white">{{ $studio[0]->signings()->count() }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -216,8 +212,9 @@
                                             </div>
                                             <div class="col">
                                                 <a style="text-decoration: none;" class="text-info h4" href="{{ route('show_track', $track->id) }}">{{ $track->title }}</a>
-                                                <p class="text-dark mt-2">By: <span class="text-light">{{ $track->owner->username }}</span></p>
-                                                <p class="text-dark mt-1">Added: <span class="text-light">{{ $track->created_at }}</span></p>
+                                                <p class="text-dark mt-2 mb-0">By: <span class="text-light">{{ $track->owner->username }}</span></p>
+                                                <p class="text-dark mb-0">Price: <span class="text-light">{{ $track->price }} Kshs.</span></p>
+                                                <p class="text-dark mb-0">Added: <span class="text-light">{{ $track->created_at }}</span></p>
                                             </div>
                                         </div>
                                     </div>

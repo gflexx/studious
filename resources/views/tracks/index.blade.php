@@ -18,7 +18,7 @@
                         <div class="col">
                             <a style="text-decoration: none;" class="text-info h4" href="{{ route('show_track', $track->id) }}">{{ $track->title }}</a>
                             <p class="text-info mt-2">By: <span class="text-light"><a href="{{ route('track_owner', $track->owner->id) }}">{{ $track->owner->username }}</a></span></p>
-                            <p class="text-info mt-1">Added: <span class="text-light">{{ $track->created_at }}</span></p>
+                            <p class="text-info mt-1">Price: <span class="text-light">{{ $track->price }} Kshs.</span></p>
                         </div>
                     </div>
                 </div>
