@@ -20,7 +20,7 @@
                 <h4 class="text-white">{{ $studio->title }}</h4>
                 <p class="text-info mt-2">About: <span class="text-white">{{ $studio->description }}</span></p>
                 <p class="text-info">Owner: <span class="text-white">{{ $studio->owner->username }}</span></p>
-                <p class="text-info">Created: <span class="text-white">{{ $studio->created_at }}</span></p>
+                <p class="text-info">Fees: <span class="text-white">{{ $studio->session_fees }} Kshs.</span></p>
                 <p class="text-info">Artist Signings: <span class="text-white">{{ $studio->signings->count() }}</span></p>
                 <p class="mb-0">
                     <button
