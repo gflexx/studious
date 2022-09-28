@@ -51,6 +51,7 @@ class StudioController extends Controller
     public function saveStudio(Request $request){
         $data = $this->validate($request, [
             'title' => 'required',
+            'session_fees' => 'required',
             'description' => 'required',
             'image' => 'required|mimes:png,jpg'
         ]);

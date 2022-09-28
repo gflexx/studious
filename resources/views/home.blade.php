@@ -5,6 +5,8 @@
 <div class="home">
 
     <div class="mt-3">
+        <h3 class="text-center text-white my-3">Welcome to online our online studio management, where you can
+            make studios, upload tracks and take care of artist signings.</h3>
         <h4 class="text-white">Signed Studios</h4>
         <div class="row g-2">
             @foreach ($studios as $studio)
@@ -33,6 +35,9 @@
                         </a>
                         <div class="card-body">
                             <a style="text-decoration: none;" class="h6 text-white" href="{{ route('show_track', $track->id) }}">{{ $track->title }}</a>
+                            @if ($track->owner->studio)
+                                <p class="text-center text-white">{{$track->owner->studio->title}}</p>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -18,8 +18,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label class="text-white" for="feese">Session Booking Fees</label>
-                    <input type="number" min="0.0" step="1.0" name="session_fees" id="fees" value="0.0" class="form-control" value="{{ old('session_fees') }}" required>
+                    <label class="text-white" for="fees">Session Booking Fees</label>
+                    <input type="number" min="0.0" step="1.0" name="session_fees" id="fees" class="form-control" value="{{ old('session_fees') }}" required>
                     @error('session_fees')
                         <p class="text-muted">{{ $message }}</p>
                     @enderror
