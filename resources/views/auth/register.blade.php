@@ -43,6 +43,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-success">Register</button>
+                    <a class="ms-5" href="{{ route('login') }}">Login</a>
                 </div>
 
             </form>

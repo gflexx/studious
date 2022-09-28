@@ -34,6 +34,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Login</button>
+                    <a class="ms-5" href="{{ route('register') }}">Register</a>
                 </div>
 
             </form>
