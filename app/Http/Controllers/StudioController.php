@@ -103,4 +103,8 @@ class StudioController extends Controller
         return redirect('users');
 
     }
+
+    public function searchStudio(){
+        return view('studio.search');
+    }
 }

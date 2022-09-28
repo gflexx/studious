@@ -38,6 +38,8 @@ Route::post('studio/edit/save', [StudioController::class, 'saveEdit'])->name('sa
 
 Route::get('studio/{id}', [StudioController::class, 'showStudio'])->name('show_studio');
 
+Route::get('search', [StudioController::class, 'searchStudio'])->name('search_studio');
+
 // signing of artists
 
 Route::get('studio/{id}/sign', [SignArtistController::class, 'signArtist'])->name('sign_artist');
