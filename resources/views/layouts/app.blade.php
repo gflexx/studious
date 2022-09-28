@@ -10,6 +10,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-dark">
+    <div class="my-4 container">
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-6 col-lg-4">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search Studio" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
         <div class="container">
