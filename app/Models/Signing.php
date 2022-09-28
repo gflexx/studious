@@ -15,10 +15,10 @@ class Signing extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function studio(){
-        return $this->belongsTo(Studio::class);
+        return $this->belongsTo(Studio::class, 'studio_id');
     }
 }
