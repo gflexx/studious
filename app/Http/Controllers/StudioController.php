@@ -104,7 +104,18 @@ class StudioController extends Controller
 
     }
 
-    public function searchStudio(){
-        return view('studio.search');
+    public function searchStudio(Request $request){
+        // get search value from request
+        $search = $request->input('search');
+
+        $studios = Studio::query()
+            ->where('title', 'LIKE', $search)
+            ->orWhere('description', 'LIKE', $search)
+            ->get();
+
+        return view('studio.search', [
+            'studios' => $studios,
+            'search' => $search,
+        ]);
     }
 }
