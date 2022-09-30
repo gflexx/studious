@@ -109,8 +109,8 @@ class StudioController extends Controller
         $search = $request->input('search');
 
         $studios = Studio::query()
-            ->where('title', 'LIKE', $search)
-            ->orWhere('description', 'LIKE', $search)
+            ->where('title', 'LIKE', '%'.$search.'%')
+            ->orWhere('description', 'LIKE', '%'.$search.'%')
             ->get();
 
         return view('studio.search', [

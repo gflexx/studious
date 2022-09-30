@@ -13,8 +13,8 @@
     <div class="my-4 container">
         <div class="row justify-content-center">
             <div class="col-10 col-md-6 col-lg-4">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search Studio" aria-label="Search">
+                <form class="d-flex" role="search" action="{{ route('search_studio') }}">
+                    <input class="form-control me-2" name="search" type="search" placeholder="Search Studio" aria-label="Search">
                     <button class="btn btn-success" type="submit">Search</button>
                 </form>
             </div>
